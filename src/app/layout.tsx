@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import "./globals.css";
+import News from "./news/page";
 
 export default function RootLayout({
   children,
@@ -16,7 +17,7 @@ export default function RootLayout({
             </div>
           }
         >
-          {children}
+          <News></News>
         </Suspense>
       </body>
     </html>

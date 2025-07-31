@@ -19,6 +19,9 @@ export default async function News() {
     const API_KEY= process.env.API_KEY
     
     const res = await fetch(`https://newsapi.org/v2/everything?q=apple&from=2025-07-29&to=2025-07-29&sortBy=popularity&apiKey=${API_KEY}`)
+    if(!res.ok) {
+        return <div className="flex justify-center items-center min-h-screen"><p className="text-base bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl max-w-xl m-4 dark:text-white text-center p-8">⚠️ Error ao carregar API</p></div>   
+    }
     const data: ResponseProps = await res.json()
 
 
@@ -28,7 +31,7 @@ export default async function News() {
             <div className="flex flex-col items-center"> 
                 {data.articles.map(art =>(
                     
-                    <div key={art.id} className="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 m-4 max-w-xl">
+                    <div key={art.url} className="bg-white dark:bg-gray-800 rounded-lg px-6 py-8 ring shadow-xl ring-gray-900/5 m-4 max-w-xl">
                         <img src={art.urlToImage} alt={art.title} className="w-full h-auto rounded-lg" />
                         <h3 className="text-gray-900 dark:text-white mt-5 text-base font-medium tracking-tight">{art.title}</h3>
                         <p className="text-gray-500 dark:text-gray-400 mt-2 text-sm ">
